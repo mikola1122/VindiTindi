@@ -1,10 +1,13 @@
 package com.kardiga.nicolas.vinditindi.network;
 
+import android.text.TextUtils;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -30,7 +33,7 @@ public class BaseRetrofit {
                     .addInterceptor(logging)
                     .build();
 
-            String url = "https://test-app";
+            String url = "https://api.flickr.com/services/rest";
 
             Gson gson = new GsonBuilder()
                     .setLenient()
