@@ -14,6 +14,9 @@ public class DataBindingAdapter {
 
     @BindingAdapter("bind:imageUrl")
     public static void loadImage(ImageView view, String imageUrl) {
-            Glide.with(view.getContext()).load(imageUrl).into(view);
+            Glide.with(view.getContext())
+                    .load(imageUrl)
+                    .fitCenter()
+                    .into(view);
     }
 }

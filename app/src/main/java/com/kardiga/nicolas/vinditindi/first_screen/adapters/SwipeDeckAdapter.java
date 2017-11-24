@@ -7,9 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.kardiga.nicolas.vinditindi.R;
 import com.kardiga.nicolas.vinditindi.databinding.ItemCardBinding;
 import com.kardiga.nicolas.vinditindi.first_screen.entity.Photo;
@@ -71,7 +69,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
         return v;
     }
 
-    public void addData(List<Photo> newPhotos){
+    public void addData(List<Photo> newPhotos) {
         data.addAll(newPhotos);
         notifyDataSetChanged();
     }

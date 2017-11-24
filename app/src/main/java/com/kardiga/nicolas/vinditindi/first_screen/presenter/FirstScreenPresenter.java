@@ -52,9 +52,25 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
 
     @Override
     public void updatePhotos(List<Photo> photos, int position) {
-        if (adapter == null){
-            adapter = new SwipeDeckAdapter(photos, (MainActivity) mView);
-            mBinding.swipeDeck.setAdapter(adapter);
+        if (adapter == null) {
+            adapter = new SwipeDeckAdapter((ArrayList<Photo>) photos, (MainActivity) mView);
+            SwipeDeck sd = mBinding.swipeDeck;
+            if (sd != null) {
+                sd.setAdapter(adapter);
+                sd.setCallback(new SwipeDeck.SwipeDeckCallback() {
+                    @Override
+                    public void cardSwipedLeft(long positionInAdapter) {
+                        cardLeftSwipe();
+                        Log.i("MainActivity", "card was swiped left, position in adapter: " + positionInAdapter);
+                    }
+
+                    @Override
+                    public void cardSwipedRight(long positionInAdapter) {
+                        cardRightSwipe();
+                        Log.i("MainActivity", "card was swiped right, position in adapter: " + positionInAdapter);
+                    }
+                });
+            }
         } else {
             adapter.addData(photos);
         }
@@ -62,13 +78,13 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
 
     @Override
     public void cardRightSwipe() {
-        like +=1;
+        like += 1;
         mBinding.likeCounter.setText(String.valueOf(like));
     }
 
     @Override
     public void cardLeftSwipe() {
-        unlike +=1;
+        unlike += 1;
         mBinding.unlikeCounter.setText(String.valueOf(unlike));
     }
 }
