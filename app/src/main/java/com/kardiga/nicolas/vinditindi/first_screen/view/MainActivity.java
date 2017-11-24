@@ -1,13 +1,19 @@
 package com.kardiga.nicolas.vinditindi.first_screen.view;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
+import com.daprlabs.aaron.swipedeck.SwipeDeck;
 import com.kardiga.nicolas.vinditindi.R;
 import com.kardiga.nicolas.vinditindi.databinding.ActivityMainBinding;
+import com.kardiga.nicolas.vinditindi.first_screen.adapters.SwipeDeckAdapter;
 import com.kardiga.nicolas.vinditindi.first_screen.callback.FirstScreenMvp;
+import com.kardiga.nicolas.vinditindi.first_screen.entity.Photo;
 import com.kardiga.nicolas.vinditindi.first_screen.presenter.FirstScreenPresenter;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements FirstScreenMvp.FirstScreenView {
     private ActivityMainBinding mBinding;
@@ -19,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements FirstScreenMvp.Fi
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mPresenter = new FirstScreenPresenter(mBinding, this);
         mBinding.setPresenter(mPresenter);
-        mPresenter.loadData();
+        mPresenter.loadPhotos();
     }
 
     @Override

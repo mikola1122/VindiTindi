@@ -11,7 +11,7 @@ public class SearchResponse {
     private Photos photos;
 
     @SerializedName("stat")
-    private String stat;
+    private String status;
 
     public Photos getPhotos() {
         return photos;
@@ -22,10 +22,10 @@ public class SearchResponse {
     }
 
     public String getStat() {
-        return stat;
+        return status;
     }
 
-    public void setStat(String stat) {
-        this.stat = stat;
+    public void setStat(String status) {
+        this.status = status;
     }
 }

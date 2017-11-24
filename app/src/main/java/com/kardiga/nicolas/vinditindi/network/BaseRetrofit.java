@@ -1,13 +1,10 @@
 package com.kardiga.nicolas.vinditindi.network;
 
-import android.text.TextUtils;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -17,37 +14,39 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Nicolas on 23.11.2017.
  */
-
 public class BaseRetrofit {
     private static Retrofit mRetrofit = null;
 
-    public static Retrofit instance(){
+
+    public static Retrofit getInstance() {
         if (mRetrofit == null) {
-
-            HttpLoggingInterceptor logging   = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-             OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                    .readTimeout(15, TimeUnit.SECONDS)
-                    .connectTimeout(15, TimeUnit.SECONDS)
-                    .addInterceptor(logging)
-                    .build();
-
-            String url = "https://api.flickr.com/services/rest";
-
-            Gson gson = new GsonBuilder()
-                    .setLenient()
-                    .setPrettyPrinting()
-                    .serializeNulls()
-                    .create();
-
+            String url = "https://api.flickr.com/services/";
             mRetrofit = new Retrofit.Builder()
                     .baseUrl(url)
-                    .client(okHttpClient)
-                    .addConverterFactory(GsonConverterFactory.create(gson))
+                    .client(getOkHttpClient())
+                    .addConverterFactory(GsonConverterFactory.create(getGson()))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
         }
         return mRetrofit;
+    }
+
+    private static OkHttpClient getOkHttpClient() {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        return new OkHttpClient.Builder()
+                .readTimeout(15, TimeUnit.SECONDS)
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .addInterceptor(logging)
+                .build();
+    }
+
+    private static Gson getGson() {
+        return new GsonBuilder()
+                .setLenient()
+                .setPrettyPrinting()
+                .serializeNulls()
+                .create();
     }
 }
