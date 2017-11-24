@@ -10,33 +10,33 @@ import java.util.List;
 
 public class Photos {
     @SerializedName("page")
-    private Integer page;
+    private Long page;
 
     @SerializedName("pages")
-    private Integer pages;
+    private Long pages;
 
     @SerializedName("perpage")
     private Integer perPage;
 
     @SerializedName("total")
-    private Integer total;
+    private Long total;
 
     @SerializedName("photo")
     private List<Photo> photos;
 
-    public Integer getPage() {
+    public Long getPage() {
         return page;
     }
 
-    public void setPage(Integer page) {
+    public void setPage(Long page) {
         this.page = page;
     }
 
-    public Integer getPages() {
+    public Long getPages() {
         return pages;
     }
 
-    public void setPages(Integer pages) {
+    public void setPages(Long pages) {
         this.pages = pages;
     }
 
@@ -48,11 +48,11 @@ public class Photos {
         this.perPage = perPage;
     }
 
-    public Integer getTotal() {
+    public Long getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(Long total) {
         this.total = total;
     }
 

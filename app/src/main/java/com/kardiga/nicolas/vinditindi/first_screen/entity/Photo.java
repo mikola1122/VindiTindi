@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Photo {
     @SerializedName("id")
-    private Integer id;
+    private Long id;
 
     @SerializedName("owner")
     private String owner;
@@ -17,10 +17,10 @@ public class Photo {
     private String secret;
 
     @SerializedName("server")
-    private Integer server;
+    private Long server;
 
     @SerializedName("farm")
-    private Integer farm;
+    private Long farm;
 
     @SerializedName("title")
     private String title;
@@ -34,11 +34,11 @@ public class Photo {
     @SerializedName("isfamily")
     private Integer isFamily;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -58,19 +58,19 @@ public class Photo {
         this.secret = secret;
     }
 
-    public Integer getServer() {
+    public Long getServer() {
         return server;
     }
 
-    public void setServer(Integer server) {
+    public void setServer(Long server) {
         this.server = server;
     }
 
-    public Integer getFarm() {
+    public Long getFarm() {
         return farm;
     }
 
-    public void setFarm(Integer farm) {
+    public void setFarm(Long farm) {
         this.farm = farm;
     }
 

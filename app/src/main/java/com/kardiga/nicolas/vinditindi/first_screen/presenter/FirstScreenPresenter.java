@@ -23,7 +23,7 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
     private ActivityMainBinding mBinding;
     private int like = 0;
     private int unlike = 0;
-    private SwipeDeckAdapter adapter = new SwipeDeckAdapter(new ArrayList<Photo>(), (MainActivity) mView);
+    private SwipeDeckAdapter adapter;
 
 
     public FirstScreenPresenter(ActivityMainBinding binding, FirstScreenMvp.FirstScreenView view) {
@@ -34,9 +34,7 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
 
     @Override
     public void loadPhotos() {
-        SwipeDeck cardStack = mBinding.swipeDeck;
-        cardStack.setAdapter(adapter);
-        cardStack.setCallback(new SwipeDeck.SwipeDeckCallback() {
+        mBinding.swipeDeck.setCallback(new SwipeDeck.SwipeDeckCallback() {
             @Override
             public void cardSwipedLeft(long positionInAdapter) {
                 cardLeftSwipe();
@@ -56,6 +54,7 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
     public void updatePhotos(List<Photo> photos, int position) {
         if (adapter == null){
             adapter = new SwipeDeckAdapter(photos, (MainActivity) mView);
+            mBinding.swipeDeck.setAdapter(adapter);
         } else {
             adapter.addData(photos);
         }
