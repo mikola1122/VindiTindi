@@ -14,6 +14,8 @@ import com.kardiga.nicolas.vinditindi.first_screen.entity.Photo;
 import com.kardiga.nicolas.vinditindi.utils.DataBindingAdapter;
 import com.kardiga.nicolas.vinditindi.utils.FlickrImageUrlGeneratorUtil;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -60,12 +62,6 @@ public class SwipeDeckAdapter extends BaseAdapter {
             viewHolder = (PhotoViewHolder) v.getTag();
         }
         viewHolder.mBinding.setPhoto(data.get(position));
-        DataBindingAdapter.loadImage(viewHolder.mBinding.image,
-                FlickrImageUrlGeneratorUtil.generateUrlFromFlickrPhoto(data.get(position)));
-        v.setOnClickListener(view -> {
-            Log.i("Layer type: ", Integer.toString(view.getLayerType()));
-            Log.i("Hardware Accel type:", Integer.toString(View.LAYER_TYPE_HARDWARE));
-        });
         return v;
     }
 

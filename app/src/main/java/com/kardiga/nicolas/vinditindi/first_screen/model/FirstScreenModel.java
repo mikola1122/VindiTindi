@@ -35,7 +35,7 @@ public class FirstScreenModel implements FirstScreenMvp.FirstScreenModel {
     public void loadPhotos(int page) {
         FlickrApi api = retrofit.create(FlickrApi.class);
         Observable<SearchResponse> o = api.getMovers(RESPONSE_FORMAT, RESPONSE_NO_JSON_FLAG, API_KEY,
-                API_METHOD, SEARCH_TAG, RESULT_SORT_TYPE, ONE_PAGE_STEP, page);
+                API_METHOD, SEARCH_TAG, null, ONE_PAGE_STEP, page);
         o.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::parseResponse);

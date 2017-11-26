@@ -3,6 +3,7 @@ package com.kardiga.nicolas.vinditindi.network;
 import com.kardiga.nicolas.vinditindi.first_screen.entity.SearchResponse;
 
 import io.reactivex.Observable;
+import io.reactivex.annotations.Nullable;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
