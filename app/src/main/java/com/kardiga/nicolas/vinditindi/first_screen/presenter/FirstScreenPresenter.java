@@ -34,20 +34,7 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
 
     @Override
     public void loadPhotos() {
-        mBinding.swipeDeck.setCallback(new SwipeDeck.SwipeDeckCallback() {
-            @Override
-            public void cardSwipedLeft(long positionInAdapter) {
-                cardLeftSwipe();
-                Log.i("MainActivity", "card was swiped left, position in adapter: " + positionInAdapter);
-            }
-
-            @Override
-            public void cardSwipedRight(long positionInAdapter) {
-                cardRightSwipe();
-                Log.i("MainActivity", "card was swiped right, position in adapter: " + positionInAdapter);
-            }
-        });
-        mModel.loadPhotos();
+        mModel.loadPhotos(1);
     }
 
     @Override
@@ -61,13 +48,13 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
                     @Override
                     public void cardSwipedLeft(long positionInAdapter) {
                         cardLeftSwipe();
-                        Log.i("MainActivity", "card was swiped left, position in adapter: " + positionInAdapter);
+                        checkPagination();
                     }
 
                     @Override
                     public void cardSwipedRight(long positionInAdapter) {
                         cardRightSwipe();
-                        Log.i("MainActivity", "card was swiped right, position in adapter: " + positionInAdapter);
+                        checkPagination();
                     }
                 });
             }
@@ -86,5 +73,11 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
     public void cardLeftSwipe() {
         unlike += 1;
         mBinding.unlikeCounter.setText(String.valueOf(unlike));
+    }
+
+    private void checkPagination(){
+        if (adapter.getCount() - like + unlike < 6){
+            mModel.loadPhotos(adapter.getCount()/20);
+        }
     }
 }

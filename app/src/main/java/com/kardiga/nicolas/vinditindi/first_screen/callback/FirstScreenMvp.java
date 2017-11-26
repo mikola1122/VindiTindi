@@ -21,6 +21,6 @@ public interface FirstScreenMvp {
     }
 
     interface FirstScreenModel {
-        void loadPhotos();
+        void loadPhotos(int page);
     }
 }
