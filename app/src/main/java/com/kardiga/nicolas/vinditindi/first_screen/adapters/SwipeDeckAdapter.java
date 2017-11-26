@@ -68,7 +68,7 @@ public class SwipeDeckAdapter extends BaseAdapter {
     class PhotoViewHolder {
         ItemCardBinding mBinding;
 
-        public PhotoViewHolder(ItemCardBinding binding) {
+        PhotoViewHolder(ItemCardBinding binding) {
             mBinding = binding;
         }
     }

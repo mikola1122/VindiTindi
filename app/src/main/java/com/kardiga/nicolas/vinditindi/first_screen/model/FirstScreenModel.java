@@ -3,10 +3,15 @@ package com.kardiga.nicolas.vinditindi.first_screen.model;
 import com.kardiga.nicolas.vinditindi.App;
 import com.kardiga.nicolas.vinditindi.first_screen.callback.FirstScreenMvp;
 import com.kardiga.nicolas.vinditindi.first_screen.entity.SearchResponse;
+import com.kardiga.nicolas.vinditindi.first_screen.presenter.FirstScreenPresenter;
+import com.kardiga.nicolas.vinditindi.first_screen.view.MainActivity;
 import com.kardiga.nicolas.vinditindi.network.FlickrApi;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+import dagger.Module;
+import dagger.Provides;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -16,9 +21,12 @@ import retrofit2.Retrofit;
  * Created by Nicolas on 23.11.2017.
  */
 
+@Module
 public class FirstScreenModel implements FirstScreenMvp.FirstScreenModel {
-    @Inject Retrofit retrofit;
-    private FirstScreenMvp.FirstScreenPresenter presenter;
+    @Inject
+    Retrofit retrofit;
+    @Inject
+    FirstScreenPresenter presenter;
     private static final String API_KEY = "9a81c5c7d034f4ab98d39d52f13fa0df";
     private static final String RESPONSE_FORMAT = "json";
     private static final int RESPONSE_NO_JSON_FLAG = 1;
@@ -29,8 +37,14 @@ public class FirstScreenModel implements FirstScreenMvp.FirstScreenModel {
     private static final String OK_STATUS = "ok";
 
 
-    public FirstScreenModel(FirstScreenMvp.FirstScreenPresenter presenter) {
-        this.presenter = presenter;
+    @Provides
+    @Singleton
+    FirstScreenModel getModel() {
+        return new FirstScreenModel();
+    }
+
+    public FirstScreenModel() {
+        MainActivity.getComponent().inject(this);
         App.getComponent().inject(this);
     }
 
@@ -44,8 +58,8 @@ public class FirstScreenModel implements FirstScreenMvp.FirstScreenModel {
                 .subscribe(this::parseResponse);
     }
 
-    private void parseResponse(SearchResponse response){
-        if (response.getStat().equals(OK_STATUS)){
+    private void parseResponse(SearchResponse response) {
+        if (response.getStat().equals(OK_STATUS)) {
             presenter.updatePhotos(response.getPhotos().getPhotos(), 0);
         }
     }

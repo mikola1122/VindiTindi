@@ -10,28 +10,39 @@ import com.kardiga.nicolas.vinditindi.first_screen.view.MainActivity;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
+
 /**
  * Created by Nicolas on 23.11.2017.
  */
-
+@Module
 public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter {
-    private FirstScreenMvp.FirstScreenView mView;
-    private FirstScreenMvp.FirstScreenModel mModel;
+    @Inject FirstScreenModel mModel;
+    private MainActivity mView;
     private ActivityMainBinding mBinding;
     private int like = 0;
     private int dislike = 0;
     private SwipeDeckAdapter adapter;
     private static boolean isLastPage = false;
 
+    public FirstScreenPresenter() {
+        MainActivity.getComponent().inject(this);
+    }
 
-    public FirstScreenPresenter(ActivityMainBinding binding, FirstScreenMvp.FirstScreenView view) {
-        mBinding = binding;
-        mView = view;
-        mModel = new FirstScreenModel(this);
+    @Provides
+    @Singleton
+    public FirstScreenPresenter getPresenter() {
+        return new FirstScreenPresenter();
     }
 
     @Override
-    public void loadPhotos() {
+    public void loadPhotos(FirstScreenMvp.FirstScreenView view) {
+        mView = ((MainActivity) view);
+        mBinding = mView.getBinding();
         mBinding.swipeDeck.setCallback(new SwipeDeck.SwipeDeckCallback() {
             @Override
             public void cardSwipedLeft(long positionInAdapter) {

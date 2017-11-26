@@ -24,7 +24,7 @@ public class BaseRetrofit {
 
     @Provides
     @Singleton
-    public Retrofit getInstance() {
+    Retrofit getInstance() {
         String url = "https://api.flickr.com/services/";
         return new Retrofit.Builder()
                 .baseUrl(url)

@@ -14,7 +14,7 @@ public interface FirstScreenMvp {
     }
 
     interface FirstScreenPresenter {
-        void loadPhotos();
+        void loadPhotos(FirstScreenView view);
         void updatePhotos(List<Photo> photos, int position);
         void cardRightSwipe();
         void cardLeftSwipe();
