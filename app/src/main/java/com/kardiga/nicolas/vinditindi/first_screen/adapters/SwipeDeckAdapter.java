@@ -2,7 +2,6 @@ package com.kardiga.nicolas.vinditindi.first_screen.adapters;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,7 @@ import android.widget.BaseAdapter;
 import com.kardiga.nicolas.vinditindi.R;
 import com.kardiga.nicolas.vinditindi.databinding.ItemCardBinding;
 import com.kardiga.nicolas.vinditindi.first_screen.entity.Photo;
-import com.kardiga.nicolas.vinditindi.utils.DataBindingAdapter;
-import com.kardiga.nicolas.vinditindi.utils.FlickrImageUrlGeneratorUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

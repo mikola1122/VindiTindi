@@ -1,9 +1,11 @@
 package com.kardiga.nicolas.vinditindi.first_screen.model;
 
+import com.kardiga.nicolas.vinditindi.App;
 import com.kardiga.nicolas.vinditindi.first_screen.callback.FirstScreenMvp;
 import com.kardiga.nicolas.vinditindi.first_screen.entity.SearchResponse;
-import com.kardiga.nicolas.vinditindi.network.BaseRetrofit;
 import com.kardiga.nicolas.vinditindi.network.FlickrApi;
+
+import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -15,8 +17,8 @@ import retrofit2.Retrofit;
  */
 
 public class FirstScreenModel implements FirstScreenMvp.FirstScreenModel {
+    @Inject Retrofit retrofit;
     private FirstScreenMvp.FirstScreenPresenter presenter;
-    private Retrofit retrofit = BaseRetrofit.getInstance();
     private static final String API_KEY = "9a81c5c7d034f4ab98d39d52f13fa0df";
     private static final String RESPONSE_FORMAT = "json";
     private static final int RESPONSE_NO_JSON_FLAG = 1;
@@ -29,6 +31,7 @@ public class FirstScreenModel implements FirstScreenMvp.FirstScreenModel {
 
     public FirstScreenModel(FirstScreenMvp.FirstScreenPresenter presenter) {
         this.presenter = presenter;
+        App.getComponent().inject(this);
     }
 
     @Override

@@ -5,6 +5,11 @@ import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.annotation.Nonnull;
+import javax.inject.Singleton;
+
+import dagger.Module;
+import dagger.Provides;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -14,24 +19,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Nicolas on 23.11.2017.
  */
+@Module
 public class BaseRetrofit {
-    private static Retrofit mRetrofit = null;
 
-
-    public static Retrofit getInstance() {
-        if (mRetrofit == null) {
-            String url = "https://api.flickr.com/services/";
-            mRetrofit = new Retrofit.Builder()
-                    .baseUrl(url)
-                    .client(getOkHttpClient())
-                    .addConverterFactory(GsonConverterFactory.create(getGson()))
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build();
-        }
-        return mRetrofit;
+    @Provides
+    @Singleton
+    public Retrofit getInstance() {
+        String url = "https://api.flickr.com/services/";
+        return new Retrofit.Builder()
+                .baseUrl(url)
+                .client(getOkHttpClient())
+                .addConverterFactory(GsonConverterFactory.create(getGson()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
     }
 
-    private static OkHttpClient getOkHttpClient() {
+    private OkHttpClient getOkHttpClient() {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
@@ -42,7 +45,7 @@ public class BaseRetrofit {
                 .build();
     }
 
-    private static Gson getGson() {
+    private Gson getGson() {
         return new GsonBuilder()
                 .setLenient()
                 .setPrettyPrinting()
