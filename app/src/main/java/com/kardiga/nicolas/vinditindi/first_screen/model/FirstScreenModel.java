@@ -6,7 +6,10 @@ import com.kardiga.nicolas.vinditindi.first_screen.entity.SearchResponse;
 import com.kardiga.nicolas.vinditindi.network.FlickrApi;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
+import dagger.Module;
+import dagger.Provides;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -16,6 +19,7 @@ import retrofit2.Retrofit;
  * Created by Nicolas on 23.11.2017.
  */
 
+@Module
 public class FirstScreenModel implements FirstScreenMvp.FirstScreenModel {
     @Inject Retrofit retrofit;
     private FirstScreenMvp.FirstScreenPresenter presenter;
@@ -28,10 +32,19 @@ public class FirstScreenModel implements FirstScreenMvp.FirstScreenModel {
     private static final int ONE_PAGE_STEP = 20;
     private static final String OK_STATUS = "ok";
 
+    public FirstScreenModel() {
+    }
 
-    public FirstScreenModel(FirstScreenMvp.FirstScreenPresenter presenter) {
-        this.presenter = presenter;
+    @Provides
+    @Singleton
+    public FirstScreenModel getInstance() {
+        return new FirstScreenModel();
+    }
+
+    @Override
+    public void setPresenter(FirstScreenMvp.FirstScreenPresenter presenter) {
         App.getComponent().inject(this);
+        this.presenter = presenter;
     }
 
     @Override

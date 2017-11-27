@@ -1,6 +1,7 @@
 package com.kardiga.nicolas.vinditindi.first_screen.presenter;
 
 import com.daprlabs.aaron.swipedeck.SwipeDeck;
+import com.kardiga.nicolas.vinditindi.App;
 import com.kardiga.nicolas.vinditindi.databinding.ActivityMainBinding;
 import com.kardiga.nicolas.vinditindi.first_screen.adapters.SwipeDeckAdapter;
 import com.kardiga.nicolas.vinditindi.first_screen.callback.FirstScreenMvp;
@@ -10,13 +11,15 @@ import com.kardiga.nicolas.vinditindi.first_screen.view.MainActivity;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Created by Nicolas on 23.11.2017.
  */
 
 public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter {
+    @Inject FirstScreenModel mModel;
     private FirstScreenMvp.FirstScreenView mView;
-    private FirstScreenMvp.FirstScreenModel mModel;
     private ActivityMainBinding mBinding;
     private int like = 0;
     private int dislike = 0;
@@ -27,7 +30,8 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
     public FirstScreenPresenter(ActivityMainBinding binding, FirstScreenMvp.FirstScreenView view) {
         mBinding = binding;
         mView = view;
-        mModel = new FirstScreenModel(this);
+        App.getComponent().inject(this);
+        mModel.setPresenter(this);
     }
 
     @Override

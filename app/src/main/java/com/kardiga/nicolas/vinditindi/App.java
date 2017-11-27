@@ -2,6 +2,8 @@ package com.kardiga.nicolas.vinditindi;
 
 import android.app.Application;
 
+import com.kardiga.nicolas.vinditindi.first_screen.model.FirstScreenModel;
+import com.kardiga.nicolas.vinditindi.first_screen.presenter.FirstScreenPresenter;
 import com.kardiga.nicolas.vinditindi.network.BaseRetrofit;
 
 /**
@@ -24,6 +26,7 @@ public class App extends Application {
     protected AppComponent buildComponent() {
         return DaggerAppComponent
                 .builder()
+                .firstScreenModel(new FirstScreenModel())
                 .baseRetrofit(new BaseRetrofit())
                 .build();
     }
