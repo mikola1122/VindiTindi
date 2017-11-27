@@ -10,6 +10,7 @@ import com.kardiga.nicolas.vinditindi.first_screen.entity.Photo;
 import com.kardiga.nicolas.vinditindi.first_screen.model.FirstScreenModel;
 import com.kardiga.nicolas.vinditindi.first_screen.view.MainActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,7 +20,8 @@ import javax.inject.Inject;
  */
 
 public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter {
-    @Inject FirstScreenModel mModel;
+    @Inject
+    FirstScreenModel mModel;
     private FirstScreenMvp.FirstScreenView mView;
     private ActivityMainBinding mBinding;
     private int like = 0;
@@ -40,33 +42,30 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
 
     @Override
     public void loadPhotos() {
-        mBinding.swipeDeck.setCallback(new SwipeDeck.SwipeDeckCallback() {
-            @Override
-            public void cardSwipedLeft(long positionInAdapter) {
-                cardLeftSwipe();
-                checkPagination();
-            }
+        adapter = new SwipeDeckAdapter(new ArrayList<Photo>(), (MainActivity) mView);
+        SwipeDeck sd = mBinding.swipeDeck;
+        if (sd != null) {
+            sd.setAdapter(adapter);
+            sd.setCallback(new SwipeDeck.SwipeDeckCallback() {
+                @Override
+                public void cardSwipedLeft(long positionInAdapter) {
+                    cardLeftSwipe();
+                    checkPagination();
+                }
 
-            @Override
-            public void cardSwipedRight(long positionInAdapter) {
-                cardRightSwipe();
-                checkPagination();
-            }
-        });
+                @Override
+                public void cardSwipedRight(long positionInAdapter) {
+                    cardRightSwipe();
+                    checkPagination();
+                }
+            });
+        }
         mModel.loadPhotos(NUMBER_OF_START_PAGE);
     }
 
     @Override
     public void updatePhotos(List<Photo> photos, int position) {
-        if (adapter == null) {
-            adapter = new SwipeDeckAdapter(photos, (MainActivity) mView);
-            SwipeDeck sd = mBinding.swipeDeck;
-            if (sd != null) {
-                sd.setAdapter(adapter);
-            }
-        } else {
-            adapter.addData(photos);
-        }
+        adapter.addData(photos);
         isLastPage = photos.size() != PAGINATION_STEP;
     }
 
