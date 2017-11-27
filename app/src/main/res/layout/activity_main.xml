@@ -3,7 +3,6 @@
     xmlns:swipedeck="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="presenter"
             type="com.kardiga.nicolas.vinditindi.first_screen.presenter.FirstScreenPresenter" />
@@ -20,8 +19,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:padding="50dp"
-            swipedeck:card_spacing="15dp"
+            android:paddingStart="@dimen/deck_padding"
+            android:paddingEnd="@dimen/deck_padding"
+            android:paddingBottom="@dimen/deck_bottom_padding"
+            swipedeck:card_spacing="@dimen/deck_cards_spacing"
             swipedeck:max_visible="3"
             swipedeck:swipe_enabled="true" />
 
@@ -30,16 +31,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|start"
-            android:textSize="20sp"
-            android:layout_margin="18dp" />
+            android:textSize="@dimen/first_screen_text_size"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_margin="@dimen/first_screen_text_views_mardin" />
 
         <TextView
             android:id="@+id/likeCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:textSize="20sp"
-            android:layout_margin="18dp" />
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/first_screen_text_size"
+            android:layout_margin="@dimen/first_screen_text_views_mardin" />
 
     </com.daprlabs.aaron.swipedeck.layouts.SwipeFrameLayout>
 

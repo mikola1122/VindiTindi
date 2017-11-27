@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">VindiTindi</string>
+    <string name="dislike">\ndislike</string>
+    <string name="like">\nlike</string>
 </resources>

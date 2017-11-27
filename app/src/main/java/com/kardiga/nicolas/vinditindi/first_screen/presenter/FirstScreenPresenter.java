@@ -2,6 +2,7 @@ package com.kardiga.nicolas.vinditindi.first_screen.presenter;
 
 import com.daprlabs.aaron.swipedeck.SwipeDeck;
 import com.kardiga.nicolas.vinditindi.App;
+import com.kardiga.nicolas.vinditindi.R;
 import com.kardiga.nicolas.vinditindi.databinding.ActivityMainBinding;
 import com.kardiga.nicolas.vinditindi.first_screen.adapters.SwipeDeckAdapter;
 import com.kardiga.nicolas.vinditindi.first_screen.callback.FirstScreenMvp;
@@ -25,6 +26,9 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
     private int dislike = 0;
     private SwipeDeckAdapter adapter;
     private static boolean isLastPage = false;
+    private static final int PAGINATION_LIMIT = 6;
+    private static final int PAGINATION_STEP = 20;
+    private static final int NUMBER_OF_START_PAGE = 1;
 
 
     public FirstScreenPresenter(ActivityMainBinding binding, FirstScreenMvp.FirstScreenView view) {
@@ -49,7 +53,7 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
                 checkPagination();
             }
         });
-        mModel.loadPhotos(1);
+        mModel.loadPhotos(NUMBER_OF_START_PAGE);
     }
 
     @Override
@@ -63,24 +67,24 @@ public class FirstScreenPresenter implements FirstScreenMvp.FirstScreenPresenter
         } else {
             adapter.addData(photos);
         }
-        isLastPage = photos.size() != 20;
+        isLastPage = photos.size() != PAGINATION_STEP;
     }
 
     @Override
     public void cardRightSwipe() {
         like += 1;
-        mBinding.likeCounter.setText(like + "\nlike");
+        mBinding.likeCounter.setText(like + mBinding.getRoot().getContext().getString(R.string.like));
     }
 
     @Override
     public void cardLeftSwipe() {
         dislike += 1;
-        mBinding.unlikeCounter.setText(dislike + "\ndislike");
+        mBinding.unlikeCounter.setText(dislike + mBinding.getRoot().getContext().getString(R.string.dislike));
     }
 
     private void checkPagination() {
-        if (!isLastPage && adapter.getCount() - like - dislike < 6) {
-            mModel.loadPhotos(adapter.getCount() / 20 + 1);
+        if (!isLastPage && adapter.getCount() - like - dislike < PAGINATION_LIMIT) {
+            mModel.loadPhotos(adapter.getCount() / PAGINATION_STEP + 1);
         }
     }
 }

@@ -18,11 +18,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/photo_card_margin"
         android:gravity="center_horizontal"
-        android:padding="25dp"
-        card_view:cardCornerRadius="14dp"
-        card_view:cardElevation="4dp"
+        android:padding="@dimen/photo_card_padding"
+        card_view:cardCornerRadius="@dimen/photo_card_cadius"
+        card_view:cardElevation="@dimen/photo_card_elevation"
         card_view:cardUseCompatPadding="true">
 
         <LinearLayout

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="photo_card_padding">25dp</dimen>
+    <dimen name="photo_card_cadius">14dp</dimen>
+    <dimen name="photo_card_elevation">4dp</dimen>
+    <dimen name="photo_card_margin">8dp</dimen>
+    <dimen name="deck_padding">30dp</dimen>
+    <dimen name="deck_bottom_padding">60dp</dimen>
+    <dimen name="deck_cards_spacing">15dp</dimen>
+    <dimen name="first_screen_text_size">18sp</dimen>
+    <dimen name="first_screen_text_views_mardin">14dp</dimen>
+</resources>
